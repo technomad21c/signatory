@@ -18,11 +18,11 @@ builds:
   goarch:
     - amd64
     - arm
-  ignore:
-    - goos: darwin
-      goarch: 386
-    - goos: windows
-      goarch: 386
+      #  ignore:
+      #    - goos: darwin
+      #      goarch: 386
+      #    - goos: windows
+      #      goarch: 386
 archives:
 - replacements:
     darwin: Darwin
