@@ -3,11 +3,11 @@ before:
   hooks:
     # you may remove this if you don't use vgo
     - go mod download
-    - go generate ./...
 builds:
 - env:
     - CGO_ENABLED=0
-  main: ./cmd/signatory/main.go
+  main: ./cmd/signatory
+  #main: ./cmd/signatory/main.go
   ldflags:
     - -X github.com/ecadlabs/signatory/pkg/metrics.GitRevision={{.Version}}
     - -X github.com/ecadlabs/signatory/pkg/metrics.GitBranch={{.Version}}
@@ -19,11 +19,11 @@ builds:
   goarch:
     - amd64
     - arm
-      #  ignore:
-      #    - goos: darwin
-      #      goarch: 386
-      #    - goos: windows
-      #      goarch: 386
+  ignore:
+    - goos: darwin
+      goarch: 386
+    - goos: windows
+      goarch: 386
 archives:
 - replacements:
     darwin: Darwin
