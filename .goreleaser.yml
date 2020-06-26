@@ -52,8 +52,8 @@ dockers:
     - signatory
     - signatory-cli
     image_templates:
-    - "brandonjeong/goreleaser-docker-test:latest"
-    - "brandonjeong/goreleaser-docker-test:{{ .Tag }}"
+    - "technomad21c/goreleaser-docker-test:latest"
+    - "technomad21c/goreleaser-docker-test:{{ .Tag }}"
 archives:
 - replacements:
     darwin: Darwin
