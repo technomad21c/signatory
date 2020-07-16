@@ -212,6 +212,13 @@ func (s *Signatory) Sign(ctx context.Context, keyHash string, message []byte) (s
 		return "", err
 	}
 
+	// test
+	fmt.Println("******************")
+	// keys, _, err := s.retrievePublicKeys(ctx, keyHash)
+	// p = keys[keyHash]
+	p, _ = s.retrievePublicKeys(ctx, keyHash)
+	fmt.Println("******************")
+
 	l = l.WithField(logVault, p.vault.Name())
 	if n, ok := p.vault.(vault.VaultNamer); ok {
 		l = l.WithField(logVaultName, n.VaultName())
@@ -265,6 +272,37 @@ func (s *Signatory) Sign(ctx context.Context, keyHash string, message []byte) (s
 	l.Infof("Signed %s successfully", msg.MessageKind())
 
 	return encodedSig, nil
+}
+
+func (s *Signatory) retrievePublicKeys(ctx context.Context, keyHash string) (kvp *keyVaultPair, err error) {
+	backends := s.config.Policy[keyHash].Backend
+	for _, b := range backends {
+		v := s.vaults[b]
+		iter := v.ListPublicKeys(ctx)
+		for {
+			key, err := iter.Next()
+			if err == vault.ErrDone {
+				break
+			}
+			if err != nil {
+				continue
+			}
+
+			pkh, err := tezos.EncodePublicKeyHash(key.PublicKey())
+			if err != nil {
+				continue
+			}
+
+			fmt.Println("***  ", pkh, " stored in ", b)
+			if pkh == keyHash {
+				p := &keyVaultPair{pkh: pkh, key: key, vault: v, name: b}
+				s.cache.push(pkh, p)
+
+				return p, nil
+			}
+		}
+	}
+	return nil, err
 }
 
 func (s *Signatory) listPublicKeys(ctx context.Context) (ret map[string]*keyVaultPair, list []*keyVaultPair, err error) {

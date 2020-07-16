@@ -22,6 +22,7 @@ type TezosPolicy struct {
 	AllowedOperations []string `yaml:"allowed_operations" validate:"dive,oneof=generic block endorsement"`
 	AllowedKinds      []string `yaml:"allowed_kinds" validate:"dive,oneof=endorsement seed_nonce_revelation activate_account ballot reveal transaction origination delegation"`
 	LogPayloads       bool     `yaml:"log_payloads"`
+    Backend           []string `yaml:"backend"`
 }
 
 // VaultConfig represents single vault instance

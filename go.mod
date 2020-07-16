@@ -8,18 +8,16 @@ require (
 	github.com/certusone/yubihsm-go v0.1.1-0.20190828101841-d0ca2ed0df7b
 	github.com/decred/dcrd/dcrec/secp256k1 v1.0.2
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
-	github.com/go-playground/locales v0.12.1 // indirect
-	github.com/go-playground/universal-translator v0.16.0 // indirect
+	github.com/go-playground/validator/v10 v10.3.0 // indirect
 	github.com/google/tink v1.3.0-rc1
 	github.com/gorilla/mux v1.7.3
 	github.com/kr/pretty v0.1.0 // indirect
-	github.com/leodido/go-urn v1.1.0 // indirect
 	github.com/prometheus/client_golang v1.0.0
 	github.com/segmentio/ksuid v1.0.2
 	github.com/sirupsen/logrus v1.4.2
 	github.com/spf13/cobra v0.0.5
 	github.com/spf13/pflag v1.0.5 // indirect
-	github.com/stretchr/testify v1.3.0
+	github.com/stretchr/testify v1.4.0
 	go.opencensus.io v0.22.1 // indirect
 	golang.org/x/crypto v0.0.0-20191029031824-8986dd9e96cf
 	golang.org/x/net v0.0.0-20191011234655-491137f69257 // indirect
